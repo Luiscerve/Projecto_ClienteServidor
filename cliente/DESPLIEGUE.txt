@@ -1,0 +1,214 @@
+INSTRUCCIONES DE DESPLIEGUE - CLIENTE TIENDA
+==============================================
+
+VERSION: 1.0.0
+CONECTA A: Servidor en puerto 12345
+
+---
+
+REQUISITOS PREVIOS
+==================
+
+1. Java Development Kit (JDK) 17 o superior
+   - Descargar desde: https://www.oracle.com/java/technologies/downloads/
+
+2. Servidor REST en ejecución
+   - Puerto: 12345
+   - Base de datos MySQL en puerto 3306
+
+3. Maven 3.6 o superior (solo si compila desde código)
+
+
+PASOS DE INSTALACION
+====================
+
+1. VERIFICAR QUE EL SERVIDOR ESTA EJECUTANDO
+
+   Abrir en navegador:
+   http://localhost:12345/swagger-ui.html
+
+   Si ves la documentación de Swagger, el servidor está corriendo.
+
+2. COMPILAR EL PROYECTO (opcional)
+
+   Si tienes el código fuente:
+
+   cd cliente
+   mvn clean compile
+
+3. GENERAR JAR (opcional)
+
+   cd cliente
+   mvn clean package -DskipTests
+
+   El JAR se generará en: target/cliente-tienda-1.0.0.jar
+
+
+OPCIONES DE EJECUCION
+====================
+
+OPCION 1: Ejecutar desde Maven (desarrollo)
+------------------------------------------------
+
+cd cliente
+mvn compile exec:java -Dexec.mainClass="com.tuusuario.client.ClienteApp"
+
+El cliente mostrará un menú interactivo.
+
+
+OPCION 2: Ejecutar el JAR (producción)
+----------------------------------------
+
+Archivo JAR: target/cliente-tienda-1.0.0.jar
+
+Comando:
+
+java -jar cliente-tienda-1.0.0.jar
+
+El cliente se iniciará inmediatamente en la consola.
+
+
+COMO USAR EL CLIENTE
+====================
+
+1. Ejecutar el JAR:
+   java -jar cliente-tienda-1.0.0.jar
+
+2. Verás el menú principal:
+   MENU PRINCIPAL
+   ==============
+   1. Gestionar Categorías
+   2. Gestionar Productos
+   0. Salir
+   Selecciona una opción: 
+
+3. Opciones disponibles:
+
+   CATEGORIAS:
+   - Listar todas
+   - Crear nueva
+   - Buscar por ID
+   - Actualizar
+   - Eliminar
+
+   PRODUCTOS:
+   - Listar todos
+   - Crear nuevo
+   - Buscar por ID
+   - Buscar por categoría
+   - Actualizar
+   - Eliminar
+
+
+EJEMPLO DE USO
+==============
+
+1. Listar categorías:
+   Opción 1 -> Opción 1
+
+2. Crear una categoría:
+   Opción 1 -> Opción 2
+   Nombre: Electrónica
+   Descripción: Productos electrónicos
+
+3. Crear un producto:
+   Opción 2 -> Opción 2
+   Nombre: Laptop
+   Precio: 999.99
+   Stock: 10
+   ID de categoría: 1 (la que creamos)
+
+4. Listar productos:
+   Opción 2 -> Opción 1
+
+
+ERRORES COMUNES Y SOLUCIONES
+============================
+
+Error: "No se puede conectar con el servidor"
+Solución:
+  - Asegúrate de ejecutar el servidor: mvn spring-boot:run (en carpeta servidor)
+  - Verifica que está en puerto 12345
+  - Prueba: http://localhost:12345/swagger-ui.html en navegador
+
+Error: "Class not found: com.tuusuario.client.ClienteApp"
+Solución:
+  - Regenera el JAR: mvn clean package
+  - Verifica que usas las comillas correctas
+
+Error: "Puerto ya en uso"
+Solución:
+  - El servidor ocupa el puerto 12345
+  - Solo debe estar ejecutando una instancia de cada aplicación
+
+
+ESTRUCTURA DE CARPETAS
+======================
+
+cliente/
+├── src/
+│   ├── main/
+│   │   └── java/com/tuusuario/client/
+│   │       ├── ClienteApp.java           (Aplicación principal)
+│   │       ├── api/
+│   │       │   └── ApiClient.java        (Cliente HTTP)
+│   │       └── model/
+│   │           ├── Categoria.java        (DTO)
+│   │           └── Producto.java         (DTO)
+│   └── test/
+│       └── java/com/tuusuario/client/
+│           └── api/
+│               └── ApiClientTest.java    (Tests)
+├── target/
+│   └── cliente-tienda-1.0.0.jar          (JAR ejecutable)
+└── pom.xml
+
+
+ENDPOINTS DEL SERVIDOR CONSUMIDOS
+==================================
+
+GET    /api/categorias              - Obtener todas las categorías
+GET    /api/categorias/{id}         - Obtener categoría por ID
+POST   /api/categorias              - Crear categoría
+PUT    /api/categorias/{id}         - Actualizar categoría
+DELETE /api/categorias/{id}         - Eliminar categoría
+
+GET    /api/productos               - Obtener todos los productos
+GET    /api/productos/{id}          - Obtener producto por ID
+GET    /api/productos/categoria/{id} - Obtener productos por categoría
+POST   /api/productos               - Crear producto
+PUT    /api/productos/{id}          - Actualizar producto
+DELETE /api/productos/{id}          - Eliminar producto
+
+
+LOGS Y DEBUGGING
+================
+
+Para ver más información de las peticiones HTTP,
+edita el código y añade System.out.println() en ApiClient.java
+
+
+DOCUMENTACION DE CODIGO
+======================
+
+Javadoc (Documentación del código):
+target/site/apidocs/javadoc/index.html
+
+Abrir en navegador:
+file:///[ruta del proyecto]/cliente/target/site/apidocs/javadoc/index.html
+
+
+CERRAR LA APLICACION
+====================
+
+En el menú principal, selecciona opción 0
+
+O presiona CTRL + C en la consola.
+
+
+SOPORTE
+=======
+
+GitHub: https://github.com/[tu_usuario]/[tu_repo]
+Autor: Luis
+Versión: 1.0.0

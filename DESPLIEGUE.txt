@@ -1,0 +1,197 @@
+INSTRUCCIONES DE DESPLIEGUE - SERVIDOR REST TIENDA
+===================================================
+
+VERSION: 1.0.0
+PUERTO: 12345
+BASE DE DATOS: MySQL (tienda_db)
+
+---
+
+REQUISITOS PREVIOS
+==================
+
+1. Java Development Kit (JDK) 17 o superior
+   - Descargar desde: https://www.oracle.com/java/technologies/downloads/
+
+2. MySQL Server 8.0 o superior
+   - Descargar desde: https://dev.mysql.com/downloads/mysql/
+
+3. Maven 3.6 o superior
+   - Descargar desde: https://maven.apache.org/download.cgi
+
+
+PASOS DE INSTALACION
+====================
+
+1. CREAR LA BASE DE DATOS
+
+   Abrir MySQL Workbench y ejecutar:
+   
+   CREATE DATABASE tienda_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+2. VERIFICAR CREDENCIALES
+
+   Por defecto el sistema usa:
+   - Usuario: root
+   - Contraseña: (vacía)
+   - Host: localhost
+   - Puerto: 3306
+
+   Si tus credenciales son diferentes, editar:
+   - src/main/resources/application.properties
+   - application.properties
+
+   Ejemplo con contraseña:
+   spring.datasource.username=root
+   spring.datasource.password=tu_contraseña
+
+3. COMPILAR EL PROYECTO
+
+   Método 1: Con Maven (desde línea de comandos)
+   
+   cd Projecto_ClienteServidor
+   mvn clean compile
+
+   Método 2: Con IDE (VS Code, IntelliJ, Eclipse)
+   
+   Ejecutar la opción "Clean" y "Build" del IDE
+
+
+OPCIONES DE EJECUCION
+====================
+
+OPCION 1: Ejecutar desde Maven (desarrollo)
+------------------------------------------------
+
+cd Projecto_ClienteServidor
+mvn spring-boot:run
+
+El servidor arrancará en: http://localhost:12345
+
+
+OPCION 2: Ejecutar el JAR (producción)
+----------------------------------------
+
+Archivo JAR: target/servidor-tienda-1.0.0.jar
+
+Comando:
+
+java -jar servidor-tienda-1.0.0.jar
+
+Parámetros opcionales:
+
+java -jar servidor-tienda-1.0.0.jar --server.port=12345
+
+Parámetros de base de datos:
+
+java -jar servidor-tienda-1.0.0.jar \
+  --spring.datasource.username=root \
+  --spring.datasource.password= \
+  --spring.datasource.url=jdbc:mysql://localhost:3306/tienda_db
+
+
+VERIFICAR QUE FUNCIONA
+======================
+
+1. Esperar a que aparezca el mensaje:
+   "Started ServerApplication in X.XXX seconds"
+
+2. Abrir navegador en:
+   http://localhost:12345/swagger-ui.html
+
+3. Debería ver la documentación interactiva de la API
+
+4. Pruebas básicas:
+
+   GET http://localhost:12345/api/categorias
+   GET http://localhost:12345/api/productos
+   GET http://localhost:12345/v3/api-docs (especificación OpenAPI)
+
+
+ERRORES COMUNES Y SOLUCIONES
+============================
+
+Error: "Access denied for user 'root'@'localhost'"
+Solución: 
+  - Verificar que MySQL está ejecutándose
+  - Verificar credenciales en application.properties
+  - Verificar que la base de datos 'tienda_db' existe
+
+Error: "Port 12345 is already in use"
+Solución:
+  - Cambiar el puerto en application.properties
+  - O terminar el proceso que usa ese puerto
+
+Error: "Could not find or load main class"
+Solución:
+  - Ejecutar "mvn clean package" para regenerar el JAR
+  - Verificar que Java está correctamente instalado
+
+
+LOGS Y DEBUGGING
+================
+
+Ver logs detallados:
+
+En application.properties cambiar:
+logging.level.root=INFO
+Por:
+logging.level.root=DEBUG
+
+Ver SQL generado por Hibernate:
+logging.level.org.hibernate.SQL=DEBUG
+logging.level.org.hibernate.type.descriptor.sql=TRACE
+
+
+DOCUMENTACION DE API
+====================
+
+Swagger UI (Interfaz interactiva):
+http://localhost:12345/swagger-ui.html
+
+OpenAPI Specification (JSON):
+http://localhost:12345/v3/api-docs
+
+Javadoc (Documentación del código):
+target/site/apidocs/javadoc/index.html
+
+Abrir en navegador:
+file:///[ruta del proyecto]/target/site/apidocs/javadoc/index.html
+
+
+ENDPOINTS DISPONIBLES
+====================
+
+CATEGORIAS
+----------
+GET    /api/categorias              - Listar todas
+GET    /api/categorias/{id}         - Obtener por ID
+POST   /api/categorias              - Crear nueva
+PUT    /api/categorias/{id}         - Actualizar
+DELETE /api/categorias/{id}         - Eliminar
+
+PRODUCTOS
+---------
+GET    /api/productos               - Listar todas
+GET    /api/productos/{id}          - Obtener por ID
+GET    /api/productos/categoria/{id} - Por categoría
+POST   /api/productos               - Crear nuevo
+PUT    /api/productos/{id}          - Actualizar
+DELETE /api/productos/{id}          - Eliminar
+
+
+STOPEAR EL SERVIDOR
+===================
+
+En la terminal donde se ejecuta:
+Presionar CTRL + C
+
+El servidor se detendrá ordenadamente.
+
+
+SOPORTE
+=======
+
+GitHub: https://github.com/[tu_usuario]/[tu_repo]
+Autor: Luis
+Versión: 1.0.0

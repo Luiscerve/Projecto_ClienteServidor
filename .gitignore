@@ -1,0 +1,19 @@
+# Compilación
+target/
+*.class
+*.jar
+*.log
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Maven
+.m2/

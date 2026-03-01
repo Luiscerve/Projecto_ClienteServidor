@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memoria del Proyecto - Sistema de Gestión de Tienda</title>
+    <style>
+        body {
+            font-family: 'Calibri', 'Arial', sans-serif;
+            line-height: 1.8;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 25px;
+            color: #333;
+            font-size: 16px;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            font-size: 26px;
+            margin-top: 35px;
+        }
+        h2 {
+            color: #2980b9;
+            border-bottom: 2px solid #bdc3c7;
+            padding-bottom: 8px;
+            font-size: 20px;
+            margin-top: 30px;
+        }
+        h3 {
+            color: #34495e;
+            font-size: 17px;
+            margin-top: 20px;
+        }
+        .captura {
+            background-color: #fff3cd;
+            border: 2px dashed #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: bold;
+            color: #856404;
+        }
+        .codigo {
+            background-color: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 12px 15px;
+            margin: 15px 0;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            white-space: pre;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .nota {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .importante {
+            background-color: #fff8e1;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .exito {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        ul, ol {
+            margin: 10px 0;
+            padding-left: 25px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .portada {
+            text-align: center;
+            padding: 60px 0;
+            border-bottom: 3px solid #3498db;
+            margin-bottom: 40px;
+        }
+        .portada h1 {
+            font-size: 32px;
+            border: none;
+            margin: 15px 0;
+        }
+        .portada p {
+            font-size: 18px;
+            margin: 8px 0;
+        }
+        .diagrama {
+            background-color: #f5f5f5;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            font-family: monospace;
+            white-space: pre;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==================== PORTADA ==================== -->
+
+<div class="portada">
+    <h1>MEMORIA DEL PROYECTO</h1>
+    <h2 
+
+<div class="portada">
+    <h1>MEMORIA DEL PROYECTO</h1>
+    <h2 style="border:none; color: #2c3e50;">Sistema de Gestión de Tienda</h2>
+    <p style="font-size: 20px; margin-top: 30px;"><strong>Aplicación Cliente-Servidor</strong></p>
+    <p style="margin-top: 40px;">
+        Programación de Servicios y Procesos<br>
+        Acceso a Datos<br>
+        Desarrollo de Interfaces
+    </p>
+    <p style="margin-top: 50px; font-size: 16px;">Curso 2025-2026</p>
+    <p><strong>Luis Tienda</strong></p>
+</div>
+
+<div class="captura">
+    📸 CAPTURA 1: Logo o imagen del proyecto (opcional)
+</div>
+
+
+
+<h1>ÍNDICE</h1>
+<ol>
+    <li><a href="#intro">¿Qué es este proyecto?</a></li>
+    <li><a href="#tecnologias">Tecnologías que he usado</a></li>
+    <li><a href="#como-funciona">¿Cómo funciona el sistema?</a></li>
+    <li><a href="#base-datos">La base de datos</a></li>
+    <li><a href="#servidor">El servidor (API REST)</a></li>
+    <li><a href="#cliente">El cliente (aplicación de consola)</a></li>
+    <li><a href="#tests">Pruebas del sistema</a></li>
+    <li><a href="#ejecutar">Cómo ejecutar el proyecto</a></li>
+    <li><a href="#capturas">Capturas de pantalla</a></li>
+    <li><a href="#conclusion">Conclusión</a></li>
+</ol>
+
+
+
+<h1 id="intro">1. ¿QUÉ ES ESTE PROYECTO?</h1>
+
+<h2>1.1. Resumen</h2>
+<p>
+He creado una aplicación para gestionar una tienda. El sistema permite:
+</p>
+<ul>
+    <li><strong>Crear categorías</strong> (Electrónica, Ropa, Alimentación...)</li>
+    <li><strong>Crear productos</strong> dentro de esas categorías</li>
+    <li><strong>Ver, modificar y borrar</strong> tanto categorías como productos</li>
+</ul>
+
+<p>
+El proyecto tiene <strong>dos partes principales</strong>:
+</p>
+
+<div class="nota">
+<strong>🖥️ SERVIDOR:</strong> Es un programa que está siempre encendido esperando peticiones. 
+Guarda los datos en MySQL y responde cuando el cliente le pide información.
+<br><br>
+<strong>💻 CLIENTE:</strong> Es la aplicación que usa el usuario. Muestra menús por consola 
+y se comunica con el servidor para hacer las operaciones.
+</div>
+
+<h2>1.2. ¿Por qué es útil?</h2>
+<p>
+Imagina que tienes una tienda y necesitas saber qué productos tienes, cuántos hay en stock 
+y a qué precio están. Con este sistema puedes:
+</p>
+<ul>
+    <li>Añadir nuevos productos cuando lleguen al almacén</li>
+    <li>Ver todo el inventario</li>
+    <li>Modificar precios o cantidades</li>
+    <li>Borrar productos que ya no vendes</li>
+    <li>Organizar todo en categorías</li>
+</ul>
+
+<h2>1.3. Asignaturas que aplica</h2>
+
+<table>
+    <tr>
+        <th>Asignatura</th>
+        <th>¿Qué he aplicado?</th>
+    </tr>
+    <tr>
+        <td><strong>Programación de Servicios y Procesos</strong></td>
+        <td>La comunicación entre cliente y servidor usando HTTP (peticiones GET, POST, PUT, DELETE)</td>
+    </tr>
+    <tr>
+        <td><strong>Acceso a Datos</strong></td>
+        <td>Guardar y leer datos de MySQL usando JPA (la forma fácil de usar bases de datos en Java)</td>
+    </tr>
+    <tr>
+        <td><strong>Desarrollo de Interfaces</strong></td>
+        <td>Los menús de la aplicación de consola que ve el usuario</td>
+    </tr>
+</table>
+
+<div class="captura">
+    📸 CAPTURA 2: Diagrama simple del sistema (puede ser dibujado a mano):
+    Usuario → Cliente (Consola) → Servidor (Spring Boot) → Base de Datos (MySQL)
+</div>
+
+
+
+<h1 id="tecnologias">2. TECNOLOGÍAS QUE HE USADO</h1>
+
+<h2>2.1. Lista de tecnologías</h2>
+
+<table>
+    <tr>
+        <th>Tecnología</th>
+        <th>Versión</th>
+        <th>¿Para qué sirve?</th>
+    </tr>
+    <tr>
+        <td><strong>Java</strong></td>
+        <td>17</td>
+        <td>El lenguaje de programación. Todo el código está escrito en Java.</td>
+    </tr>
+    <tr>
+        <td><strong>Spring Boot</strong></td>
+        <td>3.3.2</td>
+        <td>Un framework que hace muy fácil crear servidores web en Java. 
+        Me ahorra escribir mucho código.</td>
+    </tr>
+    <tr>
+        <td><strong>MySQL</strong></td>
+        <td>8.0</td>
+        <td>La base de datos donde se guardan las categorías y productos.</td>
+    </tr>
+    <tr>
+        <td><strong>Maven</strong></td>
+        <td>3.x</td>
+        <td>Descarga automáticamente las librerías que necesito y compila el proyecto.</td>
+    </tr>
+    <tr>
+        <td><strong>JPA / Hibernate</strong></td>
+        <td>-</td>
+        <td>Permite guardar objetos Java directamente en la base de datos sin escribir SQL a mano.</td>
+    </tr>
+    <tr>
+        <td><strong>GSON</strong></td>
+        <td>2.10.1</td>
+        <td>Convierte objetos Java a JSON y viceversa (JSON es el formato que usa la API).</td>
+    </tr>
+    <tr>
+        <td><strong>JUnit 5</strong></td>
+        <td>-</td>
+        <td>Para escribir y ejecutar pruebas automáticas del código.</td>
+    </tr>
+    <tr>
+        <td><strong>Swagger</strong></td>
+        <td>2.6.0</td>
+        <td>Crea una página web bonita para probar la API desde el navegador.</td>
+    </tr>
+</table>
+
+<h2>2.2. ¿Por qué elegí estas tecnologías?</h2>
+
+<div class="nota">
+<strong>Spring Boot:</strong> Es el framework más usado en empresas para crear APIs en Java. 
+Además, hace todo más fácil: con pocas líneas de código ya tienes un servidor funcionando.
+</div>
+
+<div class="nota">
+<strong>MySQL:</strong> Es gratis, fácil de usar y muy conocido. Ya lo habíamos visto en clase 
+de Acceso a Datos.
+</div>
+
+<div class="nota">
+<strong>Maven:</strong> Me permite añadir librerías simplemente escribiendo su nombre en un archivo 
+(pom.xml). Maven las descarga automáticamente de Internet.
+</div>
+
+<div class="captura">
+    📸 CAPTURA 3: Logos de las tecnologías (Java, Spring Boot, MySQL, Maven)
+</div>
+
+
+
+<h1 id="como-funciona">3. ¿CÓMO FUNCIONA EL SISTEMA?</h1>
+
+<h2>3.1. Visión general</h2>
+
+<p>
+El sistema funciona así: el <strong>cliente</strong> envía peticiones al <strong>servidor</strong>, 
+el servidor procesa la petición, consulta o modifica la <strong>base de datos</strong>, 
+y devuelve una respuesta al cliente.
+</p>
+
+<div class="diagrama">
+┌──────────────────┐                      ┌──────────────────┐                     ┌─────────────┐
+│     USUARIO      │                      │     SERVIDOR     │                     │   MySQL     │
+│  (ve los menús)  │                      │  (Spring Boot)   │                     │  (guarda    │
+│                  │  ── petición HTTP ──▶│                  │ ── consulta SQL ──▶ │   datos)    │
+│                  │  ◀── respuesta ────  │                  │ ◀── resultado ────  │             │
+└──────────────────┘                      └──────────────────┘                     └─────────────┘
+        │                                                                                  │
+        │                                                                                  │
+        └──────────────────────── El servidor es el "puente" ─────────────────────────────┘
+</div>
+
+<h2>3.2. Ejemplo: Crear un producto</h2>
+
+<p>Cuando el usuario quiere <strong>crear un producto nuevo</strong>, esto es lo que pasa:</p>
+
+<ol>
+    <li>El usuario selecciona "Crear producto" en el menú del cliente</li>
+    <li>El usuario escribe el nombre, precio, stock y categoría</li>
+    <li>El cliente crea un objeto Producto con esos datos</li>
+    <li>El cliente convierte el objeto a JSON (texto)</li>
+    <li>El cliente envía una petición POST al servidor con ese JSON</li>
+    <li>El servidor recibe la petición en el <strong>Controller</strong></li>
+    <li>El Controller llama al <strong>Service</strong> para procesar los datos</li>
+    <li>El Service valida que todo esté bien y llama al <strong>Repository</strong></li>
+    <li>El Repository guarda el producto en MySQL</li>
+    <li>El servidor devuelve el producto creado (con su ID nuevo) al cliente</li>
+    <li>El cliente muestra por pantalla: "Producto creado con éxito"</li>
+</ol>
+
+<div class="captura">
+    📸 CAPTURA 4: Diagrama del flujo cuando se crea un producto
+</div>
+
+<h2>3.3. Las capas del servidor</h2>
+
+<p>
+El servidor está organizado en <strong>capas</strong>. Cada capa tiene una responsabilidad:
+</p>
+
+<table>
+    <tr>
+        <th>Capa</th>
+        <th>¿Qué hace?</th>
+        <th>Ejemplo</th>
+    </tr>
+    <tr>
+        <td><strong>Controller</strong></td>
+        <td>Recibe las peticiones HTTP y devuelve las respuestas</td>
+        <td>CategoriaController.java</td>
+    </tr>
+    <tr>
+        <td><strong>Service</strong></td>
+        <td>Contiene la lógica de negocio (validaciones, reglas...)</td>
+        <td>CategoriaService.java</td>
+    </tr>
+    <tr>
+        <td><strong>Repository</strong></td>
+        <td>Habla con la base de datos (guardar, leer, borrar...)</td>
+        <td>CategoriaRepository.java</td>
+    </tr>
+    <tr>
+        <td><strong>Model</strong></td>
+        <td>Son las clases que representan los datos (entidades)</td>
+        <td>Categoria.java, Producto.java</td>
+    </tr>
+</table>
+
+<div class="diagrama">
+Así se organiza el código del servidor:
+
+      Petición HTTP
+           │
+           ▼
+    ┌─────────────────┐
+    │   CONTROLLER    │  ← Recibe GET, POST, PUT, DELETE
+    └────────┬────────┘
+             │
+             ▼
+    ┌─────────────────┐
+    │    SERVICE      │  ← Valida datos y aplica reglas
+    └────────┬────────┘
+             │
+             ▼
+    ┌─────────────────┐
+    │   REPOSITORY    │  ← Guarda/lee de MySQL
+    └────────┬────────┘
+             │
+             ▼
+    ┌─────────────────┐
+    │     MySQL       │  ← Base de datos
+    └─────────────────┘
+</div>
+
+<div class="captura">
+    📸 CAPTURA 5: Estructura de carpetas del servidor en VS Code
+</div>
+
+
+
+<h1 id="base-datos">4. LA BASE DE DATOS</h1>
+
+<h2>4.1. Las tablas</h2>
+
+<p>
+La base de datos se llama <strong>tienda_db</strong> y tiene <strong>2 tablas</strong>:
+</p>
+
+<h3>Tabla: categorias</h3>
+<table>
+    <tr>
+        <th>Campo</th>
+        <th>Tipo</th>
+        <th>¿Para qué sirve?</th>
+    </tr>
+    <tr>
+        <td><strong>id</strong></td>
+        <td>BIGINT (número grande)</td>
+        <td>Identificador único. Se genera automáticamente (1, 2, 3...)</td>
+    </tr>
+    <tr>
+        <td><strong>nombre</strong></td>
+        <td>VARCHAR(100)</td>
+        <td>El nombre de la categoría (ej: "Electrónica")</td>
+    </tr>
+    <tr>
+        <td><strong>descripcion</strong></td>
+        <td>VARCHAR(255)</td>
+        <td>Una descripción opcional</td>
+    </tr>
+</table>
+
+<h3>Tabla: productos</h3>
+<table>
+    <tr>
+        <th>Campo</th>
+        <th>Tipo</th>
+        <th>¿Para qué sirve?</th>
+    </tr>
+    <tr>
+        <td><strong>id</strong></td>
+        <td>BIGINT</td>
+        <td>Identificador único del producto</td>
+    </tr>
+    <tr>
+        <td><strong>nombre</strong></td>
+        <td>VARCHAR(100)</td>
+        <td>El nombre del producto (ej: "Laptop Dell")</td>
+    </tr>
+    <tr>
+        <td><strong>precio</strong></td>
+        <td>DOUBLE</td>
+        <td>El precio en euros (ej: 599.99)</td>
+    </tr>
+    <tr>
+        <td><strong>stock</strong></td>
+        <td>INT</td>
+        <td>Cuántas unidades hay disponibles</td>
+    </tr>
+    <tr>
+        <td><strong>categoria_id</strong></td>
+        <td>BIGINT</td>
+        <td>A qué categoría pertenece (relación con la otra tabla)</td>
+    </tr>
+</table>
+
+<h2>4.2. Relación entre tablas</h2>
+
+<p>
+Una <strong>categoría</strong> puede tener <strong>muchos productos</strong>. 
+Por ejemplo, la categoría "Electrónica" puede tener: Laptop, Móvil, Tablet, etc.
+</p>
+
+<p>
+Esto se llama relación <strong>1 a N</strong> (uno a muchos):
+</p>
+
+<div class="diagrama">
+┌─────────────────┐          ┌─────────────────┐
+│   CATEGORÍA     │          │    PRODUCTO     │
+├─────────────────┤          ├─────────────────┤
+│ id: 1           │──┐       │ id: 1           │
+│ nombre:         │  │       │ nombre: Laptop  │
+│   "Electrónica" │  │       │ precio: 999.99  │
+└─────────────────┘  │       │ categoria_id: 1 │◄─┐
+                     │       └─────────────────┘  │
+                     │                            │
+                     │       ┌─────────────────┐  │
+                     │       │ id: 2           │  │
+                     │       │ nombre: Móvil   │  │
+                     └──────▶│ categoria_id: 1 │──┘
+                             └─────────────────┘
+
+       1 categoría  ───────────▶  N productos
+</div>
+
+<div class="captura">
+    📸 CAPTURA 6: MySQL Workbench mostrando la tabla "categorias" con datos
+</div>
+
+<div class="captura">
+    📸 CAPTURA 7: MySQL Workbench mostrando la tabla "productos" con datos
+</div>
+
+<h2>4.3. Configuración</h2>
+
+<p>
+La conexión a MySQL se configura en el archivo <strong>application.properties</strong>:
+</p>
+
+<div class="codigo"># Puerto del servidor (donde escucha peticiones)
+server.port=12345
+
+# Conexión a MySQL
+spring.datasource.url=jdbc:mysql://localhost:3306/tienda_db
+spring.datasource.username=root
+spring.datasource.password=
+
+# JPA crea las tablas automáticamente
+spring.jpa.hibernate.ddl-auto=update</div>
+
+<div class="importante">
+<strong>¿Qué hace "ddl-auto=update"?</strong><br>
+Cuando arrancas el servidor, Hibernate (JPA) mira tus clases Java (Categoria.java, Producto.java) 
+y crea las tablas automáticamente en MySQL si no existen. Si ya existen, las actualiza si hace falta.
+<br><br>
+¡No tienes que escribir CREATE TABLE a mano!
+</div>
+
+<h2>4.4. Crear la base de datos</h2>
+
+<p>Lo único que tienes que hacer en MySQL es crear la base de datos:</p>
+
+<div class="codigo">CREATE DATABASE tienda_db;</div>
+
+<p>Las tablas se crean solas cuando arrancas el servidor.</p>
+
+
+
+<h1 id="servidor">5. EL SERVIDOR (API REST)</h1>
+
+<h2>5.1. ¿Qué es una API REST?</h2>
+
+<p>
+Una <strong>API REST</strong> es una forma de que dos programas se comuniquen por Internet 
+usando peticiones HTTP (como un navegador web, pero sin interfaz gráfica).
+</p>
+
+<p>Los tipos de petición más comunes son:</p>
+
+<table>
+    <tr>
+        <th>Método HTTP</th>
+        <th>¿Para qué se usa?</th>
+        <th>Ejemplo</th>
+    </tr>
+    <tr>
+        <td><strong>GET</strong></td>
+        <td>Obtener datos (leer)</td>
+        <td>GET /api/productos → devuelve todos los productos</td>
+    </tr>
+    <tr>
+        <td><strong>POST</strong></td>
+        <td>Crear algo nuevo</td>
+        <td>POST /api/productos → crea un producto nuevo</td>
+    </tr>
+    <tr>
+        <td><strong>PUT</strong></td>
+        <td>Modificar algo existente</td>
+        <td>PUT /api/productos/5 → modifica el producto con id=5</td>
+    </tr>
+    <tr>
+        <td><strong>DELETE</strong></td>
+        <td>Borrar algo</td>
+        <td>DELETE /api/productos/5 → borra el producto con id=5</td>
+    </tr>
+</table>
+
+<h2>5.2. Endpoints del servidor</h2>
+
+<p>
+Un <strong>endpoint</strong> es una "dirección" del servidor que hace algo concreto.
+Mi servidor tiene <strong>10 endpoints</strong>:
+</p>
+
+<h3>Endpoints de Categorías</h3>
+<table>
+    <tr>
+        <th>Método</th>
+        <th>URL</th>
+        <th>¿Qué hace?</th>
+    </tr>
+    <tr>
+        <td>GET</td>
+        <td>/api/categorias</td>
+        <td>Devuelve todas las categorías</td>
+    </tr>
+    <tr>
+        <td>GET</td>
+        <td>/api/categorias/{id}</td>
+        <td>Devuelve una categoría por su ID</td>
+    </tr>
+    <tr>
+        <td>POST</td>
+        <td>/api/categorias</td>
+        <td>Crea una categoría nueva</td>
+    </tr>
+    <tr>
+        <td>PUT</td>
+        <td>/api/categorias/{id}</td>
+        <td>Modifica una categoría</td>
+    </tr>
+    <tr>
+        <td>DELETE</td>
+        <td>/api/categorias/{id}</td>
+        <td>Borra una categoría</td>
+    </tr>
+</table>
+
+<h3>Endpoints de Productos</h3>
+<table>
+    <tr>
+        <th>Método</th>
+        <th>URL</th>
+        <th>¿Qué hace?</th>
+    </tr>
+    <tr>
+        <td>GET</td>
+        <td>/api/productos</td>
+        <td>Devuelve todos los productos</td>
+    </tr>
+    <tr>
+        <td>GET</td>
+        <td>/api/productos/{id}</td>
+        <td>Devuelve un producto por su ID</td>
+    </tr>
+    <tr>
+        <td>GET</td>
+        <td>/api/productos/categoria/{id}</td>
+        <td>Devuelve los productos de una categoría</td>
+    </tr>
+    <tr>
+        <td>POST</td>
+        <td>/api/productos</td>
+        <td>Crea un producto nuevo</td>
+    </tr>
+    <tr>
+        <td>PUT</td>
+        <td>/api/productos/{id}</td>
+        <td>Modifica un producto</td>
+    </tr>
+    <tr>
+        <td>DELETE</td>
+        <td>/api/productos/{id}</td>
+        <td>Borra un producto</td>
+    </tr>
+</table>
+
+<h2>5.3. Código del Controller</h2>
+
+<p>
+El <strong>CategoriaController</strong> recibe las peticiones HTTP. 
+Aquí está el código simplificado:
+</p>
+
+<div class="codigo">@RestController
+@RequestMapping("/api/categorias")
+public class CategoriaController {
+
+    @Autowired
+    private CategoriaService categoriaService;
+
+    // GET /api/categorias - Obtener todas
+    @GetMapping
+    public List&lt;Categoria&gt; obtenerTodas() {
+        return categoriaService.obtenerTodas();
+    }
+
+    // GET /api/categorias/5 - Obtener una por ID
+    @GetMapping("/{id}")
+    public Categoria obtenerPorId(@PathVariable Long id) {
+        return categoriaService.obtenerPorId(id);
+    }
+
+    // POST /api/categorias - Crear nueva
+    @PostMapping
+    public Categoria crear(@RequestBody Categoria categoria) {
+        return categoriaService.crear(categoria);
+    }
+
+    // PUT /api/categorias/5 - Actualizar
+    @PutMapping("/{id}")
+    public Categoria actualizar(@PathVariable Long id, @RequestBody Categoria categoria) {
+        return categoriaService.actualizar(id, categoria);
+    }
+
+    // DELETE /api/categorias/5 - Eliminar
+    @DeleteMapping("/{id}")
+    public void eliminar(@PathVariable Long id) {
+        categoriaService.eliminar(id);
+    }
+}</div>
+
+<div class="nota">
+<strong>¿Qué significan las anotaciones?</strong>
+<ul>
+    <li><strong>@RestController</strong>: Esta clase responde a peticiones HTTP</li>
+    <li><strong>@RequestMapping("/api/categorias")</strong>: Todos los métodos empiezan con esa URL</li>
+    <li><strong>@GetMapping</strong>: Responde a peticiones GET</li>
+    <li><strong>@PostMapping</strong>: Responde a peticiones POST</li>
+    <li><strong>@PathVariable</strong>: Coge el {id} de la URL</li>
+    <li><strong>@RequestBody</strong>: Coge los datos JSON del cuerpo de la petición</li>
+    <li><strong>@Autowired</strong>: Spring inyecta automáticamente el Service</li>
+</ul>
+</div>
+
+<div class="captura">
+    📸 CAPTURA 8: Código del CategoriaController.java en VS Code
+</div>
+
+<h2>5.4. Código del Service</h2>
+
+<p>
+El <strong>CategoriaService</strong> contiene la lógica de negocio:
+</p>
+
+<div class="codigo">@Service
+public class CategoriaService {
+
+    @Autowired
+    private CategoriaRepository categoriaRepository;
+
+    public List&lt;Categoria&gt; obtenerTodas() {
+        return categoriaRepository.findAll();
+    }
+
+    public Categoria obtenerPorId(Long id) {
+        return categoriaRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Categoría no encontrada"));
+    }
+
+    public Categoria crear(Categoria categoria) {
+        return categoriaRepository.save(categoria);
+    }
+
+    public Categoria actualizar(Long id, Categoria datos) {
+        Categoria categoria = obtenerPorId(id);
+        categoria.setNombre(datos.getNombre());
+        categoria.setDescripcion(datos.getDescripcion());
+        return categoriaRepository.save(categoria);
+    }
+
+    public void eliminar(Long id) {
+        Categoria categoria = obtenerPorId(id);
+        categoriaRepository.delete(categoria);
+    }
+}</div>
+
+<div class="captura">
+    📸 CAPTURA 9: Código del CategoriaService.java en VS Code
+</div>
+
+<h2>5.5. Código del Repository</h2>
+
+<p>
+El <strong>Repository</strong> es muy simple porque Spring Data JPA hace casi todo:
+</p>
+
+<div class="codigo">@Repository
+public interface CategoriaRepository extends JpaRepository&lt;Categoria, Long&gt; {
+    // No hace falta escribir nada más
+    // JpaRepository ya tiene: findAll(), findById(), save(), delete()...
+}</div>
+
+<div class="nota">
+<strong>¿Por qué está vacío?</strong><br>
+JpaRepository ya incluye los métodos básicos (CRUD). Solo tenemos que decirle qué entidad 
+usa (Categoria) y qué tipo tiene el ID (Long). Spring hace el resto.
+</div>
+
+<h2>5.6. Código de la Entidad</h2>
+
+<p>
+La <strong>entidad Categoria</strong> representa la tabla en la base de datos:
+</p>
+
+<div class="codigo">@Entity
+@Table(name = "categorias")
+public class Categoria {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, length = 100)
+    private String nombre;
+
+    @Column(length = 255)
+    private String descripcion;
+
+    // Constructores, getters y setters...
+}</div>
+
+<div class="nota">
+<strong>¿Qué significan las anotaciones?</strong>
+<ul>
+    <li><strong>@Entity</strong>: Esta clase se guarda en la base de datos</li>
+    <li><strong>@Table(name = "categorias")</strong>: El nombre de la tabla en MySQL</li>
+    <li><strong>@Id</strong>: Este campo es la clave primaria</li>
+    <li><strong>@GeneratedValue</strong>: El ID se genera automáticamente (1, 2, 3...)</li>
+    <li><strong>@Column</strong>: Configura cómo será la columna en la tabla</li>
+</ul>
+</div>
+
+<div class="captura">
+    📸 CAPTURA 10: Código de Categoria.java (entidad) en VS Code
+</div>
+
+<h2>5.7. Documentación con Swagger</h2>
+
+<p>
+He añadido <strong>Swagger</strong> al proyecto. Swagger crea una página web donde puedes 
+ver y probar todos los endpoints de la API desde el navegador.
+</p>
+
+<p>Para acceder a Swagger:</p>
+<ol>
+    <li>Arranca el servidor</li>
+    <li>Abre el navegador en: <strong>http://localhost:12345/swagger-ui.html</strong></li>
+    <li>Verás todos los endpoints y podrás probarlos</li>
+</ol>
+
+<div class="captura">
+    📸 CAPTURA 11: Página de Swagger mostrando los endpoints de la API
+</div>
+
+<div class="captura">
+    📸 CAPTURA 12: Swagger ejecutando una petición GET para obtener categorías
+</div>
+
+
+
+<h1 id="cliente">6. EL CLIENTE (APLICACIÓN DE CONSOLA)</h1>
+
+<h2>6.1. ¿Qué hace el cliente?</h2>
+
+<p>
+El cliente es una aplicación de consola que el usuario ejecuta para interactuar con el sistema.
+Muestra menús y permite hacer todas las operaciones CRUD.
+</p>
+
+<h2>6.2. Estructura del cliente</h2>
+
+<div class="diagrama">
+cliente/
+├── pom.xml                          ← Dependencias Maven
+└── src/
+    └── main/
+        └── java/
+            └── com/
+                └── luistienda/
+                    ├── ClienteApp.java    ← Programa principal (menús)
+                    ├── api/
+                    │   └── ApiClient.java ← Se comunica con el servidor
+                    └── model/
+                        ├── Categoria.java ← Clase para categorías
+                        └── Producto.java  ← Clase para productos
+</div>
+
+<h2>6.3. Menús del cliente</h2>
+
+<p>Cuando ejecutas el cliente, ves este menú:</p>
+
+<div class="codigo">MENÚ PRINCIPAL - TIENDA LUIS
+
+1. Gestionar Categorías
+2. Gestionar Productos
+0. Salir
+
+Elige opción:</div>
+
+<p>Si eliges "1. Categorías":</p>
+
+<div class="codigo">CATEGORÍAS
+
+1. Ver todas
+2. Crear nueva
+3. Buscar por ID
+4. Actualizar
+5. Eliminar
+0. Volver
+
+Elige opción:</div>
+
+<div class="captura">
+    📸 CAPTURA 13: Menú principal del cliente en la consola
+</div>
+
+<div class="captura">
+    📸 CAPTURA 14: Menú de gestión de categorías
+</div>
+
+<h2>6.4. Código del ApiClient</h2>
+
+<p>
+El <strong>ApiClient</strong> es la clase que se comunica con el servidor.
+Usa <strong>HttpURLConnection</strong> (incluido en Java, no necesita librerías externas):
+</p>
+
+<div class="codigo">public class ApiClient {
+
+    private static final String BASE_URL = "http://localhost:12345/api";
+    private static final Gson gson = new Gson();
+
+    // Obtener todas las categorías
+    public static List&lt;Categoria&gt; obtenerCategorias() throws Exception {
+        String respuesta = hacerPeticionGET(BASE_URL + "/categorias");
+        Type tipo = new TypeToken&lt;List&lt;Categoria&gt;&gt;(){}.getType();
+        return gson.fromJson(respuesta, tipo);
+    }
+
+    // Crear una categoría
+    public static Categoria crearCategoria(Categoria categoria) throws Exception {
+        String json = gson.toJson(categoria);
+        String respuesta = hacerPeticionPOST(BASE_URL + "/categorias", json);
+        return gson.fromJson(respuesta, Categoria.class);
+    }
+
+    // Método para hacer peticiones GET
+    private static String hacerPeticionGET(String url) throws Exception {
+        HttpURLConnection conexion = (HttpURLConnection) new URL(url).openConnection();
+        conexion.setRequestMethod("GET");
+        return leerRespuesta(conexion);
+    }
+
+    // Método para hacer peticiones POST
+    private static String hacerPeticionPOST(String url, String json) throws Exception {
+        HttpURLConnection conexion = (HttpURLConnection) new URL(url).openConnection();
+        conexion.setRequestMethod("POST");
+        conexion.setRequestProperty("Content-Type", "application/json");
+        conexion.setDoOutput(true);
+        
+        // Enviar el JSON
+        conexion.getOutputStream().write(json.getBytes("UTF-8"));
+        
+        return leerRespuesta(conexion);
+    }
+}</div>
+
+<div class="nota">
+<strong>¿Cómo funciona?</strong>
+<ol>
+    <li>Crea una conexión HTTP a la URL del servidor</li>
+    <li>Configura el método (GET, POST, PUT, DELETE)</li>
+    <li>Si es POST/PUT, envía los datos en formato JSON</li>
+    <li>Lee la respuesta del servidor</li>
+    <li>Convierte el JSON de vuelta a objetos Java con GSON</li>
+</ol>
+</div>
+
+<div class="captura">
+    📸 CAPTURA 15: Código del ApiClient.java en VS Code
+</div>
+
+<h2>6.5. Ejemplo de uso: Crear una categoría</h2>
+
+<p>Esto es lo que ve el usuario cuando crea una categoría:</p>
+
+<div class="codigo">--- CREAR NUEVA CATEGORÍA ---
+Introduce el nombre: Electrónica
+Introduce la descripción: Dispositivos electrónicos
+
+✓ Categoría creada con éxito:
+  ID: 1
+  Nombre: Electrónica
+  Descripción: Dispositivos electrónicos
+
+Presiona Enter para continuar...</div>
+
+<div class="captura">
+    📸 CAPTURA 16: Cliente creando una categoría nueva
+</div>
+
+<div class="captura">
+    📸 CAPTURA 17: Cliente mostrando la lista de categorías
+</div>
+
+<h2>6.6. Ejemplo de uso: Crear un producto</h2>
+
+<div class="codigo">--- CREAR NUEVO PRODUCTO ---
+Introduce el nombre: Laptop Dell XPS
+Introduce el precio: 1299.99
+Introduce el stock: 10
+Introduce el ID de la categoría: 1
+
+✓ Producto creado con éxito:
+  ID: 5
+  Nombre: Laptop Dell XPS
+  Precio: 1299.99€
+  Stock: 10 unidades
+  Categoría: Electrónica
+
+Presiona Enter para continuar...</div>
+
+<div class="captura">
+    📸 CAPTURA 18: Cliente creando un producto nuevo
+</div>
+
+<div class="captura">
+    📸 CAPTURA 19: Cliente mostrando la lista de productos
+</div>
+
+
+
+<h1 id="tests">7. PRUEBAS DEL SISTEMA</h1>
+
+<h2>7.1. ¿Cómo he probado el proyecto?</h2>
+
+<p>
+He creado <strong>pruebas automáticas</strong> usando <strong>JUnit 5</strong>.
+Las pruebas comprueban que todo funciona correctamente conectándose a la base de datos real.
+</p>
+
+<p>En total hay <strong>12 pruebas</strong>:</p>
+
+<table>
+    <tr>
+        <th>Archivo</th>
+        <th>Nº de pruebas</th>
+        <th>¿Qué prueba?</th>
+    </tr>
+    <tr>
+        <td>CategoriaServiceTest.java</td>
+        <td>5</td>
+        <td>Crear, leer, actualizar y borrar categorías</td>
+    </tr>
+    <tr>
+        <td>ProductoServiceTest.java</td>
+        <td>7</td>
+        <td>Crear, leer, actualizar, borrar productos y filtrar por categoría</td>
+    </tr>
+</table>
+
+<h2>7.2. Ejemplo de prueba</h2>
+
+<p>Esta prueba comprueba que se puede <strong>crear una categoría</strong> correctamente:</p>
+
+<div class="codigo">@SpringBootTest
+class CategoriaServiceTest {
+
+    @Autowired
+    private CategoriaService categoriaService;
+
+    @Autowired
+    private CategoriaRepository categoriaRepository;
+
+    @AfterEach
+    void limpiarDatos() {
+        // Borra los datos de prueba después de cada test
+        categoriaRepository.deleteAll();
+    }
+
+    @Test
+    void testCrearCategoria() {
+        // 1. Crear una categoría de prueba
+        Categoria categoria = new Categoria();
+        categoria.setNombre("Test Categoria");
+        categoria.setDescripcion("Descripción de prueba");
+
+        // 2. Guardarla en la base de datos
+        Categoria resultado = categoriaService.crear(categoria);
+
+        // 3. Comprobar que se ha guardado bien
+        assertNotNull(resultado.getId());  // Tiene ID
+        assertEquals("Test Categoria", resultado.getNombre());  // El nombre es correcto
+    }
+}</div>
+
+<div class="nota">
+<strong>¿Qué hace @SpringBootTest?</strong><br>
+Arranca toda la aplicación Spring Boot para que la prueba pueda usar los servicios 
+y la base de datos real. Es una <strong>prueba de integración</strong>.
+</div>
+
+<div class="nota">
+<strong>¿Qué hace @AfterEach?</strong><br>
+Después de cada prueba, borra todos los datos que se han creado. 
+Así cada prueba empieza con la base de datos limpia.
+</div>
+
+<h2>7.3. Ejecutar las pruebas</h2>
+
+<p>Para ejecutar todas las pruebas:</p>
+
+<div class="codigo">cd servidor
+mvn test</div>
+
+<p>Resultado esperado:</p>
+
+<div class="codigo">[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------</div>
+
+<div class="captura">
+    📸 CAPTURA 20: Terminal mostrando "mvn test" con todas las pruebas pasando
+</div>
+
+<div class="captura">
+    📸 CAPTURA 21: Código de CategoriaServiceTest.java en VS Code
+</div>
+
+
+
+<h1 id="ejecutar">8. CÓMO EJECUTAR EL PROYECTO</h1>
+
+<h2>8.1. Requisitos previos</h2>
+
+<p>Antes de ejecutar el proyecto necesitas tener instalado:</p>
+
+<ul>
+    <li><strong>Java 17</strong> o superior</li>
+    <li><strong>MySQL 8.0</strong> o superior</li>
+    <li><strong>Maven 3.x</strong></li>
+</ul>
+
+<h2>8.2. Paso 1: Crear la base de datos</h2>
+
+<p>Abre MySQL y ejecuta:</p>
+
+<div class="codigo">CREATE DATABASE tienda_db;</div>
+
+<h2>8.3. Paso 2: Compilar los proyectos</h2>
+
+<div class="codigo"># Compilar el servidor
+cd servidor
+mvn clean package -DskipTests
+
+# Compilar el cliente
+cd ../cliente
+mvn clean package -DskipTests</div>
+
+<p>Esto genera los archivos JAR:</p>
+<ul>
+    <li><strong>servidor/target/servidor-tienda-1.0.0.jar</strong></li>
+    <li><strong>cliente/target/cliente-tienda-1.0.0.jar</strong></li>
+</ul>
+
+<h2>8.4. Paso 3: Ejecutar el servidor</h2>
+
+<div class="codigo">java -jar servidor/target/servidor-tienda-1.0.0.jar</div>
+
+<p>Deberías ver en la consola:</p>
+
+<div class="codigo">  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+Tomcat started on port 12345
+Started ServerApplication in 3.5 seconds</div>
+
+<p>El servidor está listo cuando ves "Started ServerApplication".</p>
+
+<h2>8.5. Paso 4: Ejecutar el cliente</h2>
+
+<p>Abre <strong>otra terminal</strong> y ejecuta:</p>
+
+<div class="codigo">java -jar cliente/target/cliente-tienda-1.0.0-jar-with-dependencies.jar</div>
+
+<p>Verás el menú principal y ya puedes empezar a usar la aplicación.</p>
+
+<div class="captura">
+    📸 CAPTURA 22: Terminal con el servidor arrancado
+</div>
+
+<div class="captura">
+    📸 CAPTURA 23: Terminal con el cliente funcionando
+</div>
+
+<h2>8.6. Acceder a la documentación</h2>
+
+<p>Con el servidor arrancado, puedes acceder a:</p>
+
+<table>
+    <tr>
+        <th>URL</th>
+        <th>¿Qué es?</th>
+    </tr>
+    <tr>
+        <td>http://localhost:12345/swagger-ui.html</td>
+        <td>Documentación interactiva de la API (Swagger)</td>
+    </tr>
+    <tr>
+        <td>servidor/target/site/apidocs/index.html</td>
+        <td>Documentación del código (Javadoc)</td>
+    </tr>
+</table>
+
+<div class="captura">
+    📸 CAPTURA 24: Swagger UI en el navegador
+</div>
+
+
+
+<h1 id="capturas">9. CAPTURAS DE PANTALLA</h1>
+
+<p>
+A continuación se incluyen capturas de pantalla del sistema funcionando:
+</p>
+
+<h2>9.1. Base de datos</h2>
+
+<div class="captura">
+    📸 CAPTURA 25: MySQL Workbench con la base de datos tienda_db
+</div>
+
+<div class="captura">
+    📸 CAPTURA 26: Tabla "categorias" con datos de ejemplo
+</div>
+
+<div class="captura">
+    📸 CAPTURA 27: Tabla "productos" con datos de ejemplo
+</div>
+
+<h2>9.2. Servidor</h2>
+
+<div class="captura">
+    📸 CAPTURA 28: Servidor arrancando en la terminal
+</div>
+
+<div class="captura">
+    📸 CAPTURA 29: Logs del servidor cuando recibe una petición
+</div>
+
+<h2>9.3. Cliente</h2>
+
+<div class="captura">
+    📸 CAPTURA 30: Cliente - Menú principal
+</div>
+
+<div class="captura">
+    📸 CAPTURA 31: Cliente - Listar todas las categorías
+</div>
+
+<div class="captura">
+    📸 CAPTURA 32: Cliente - Crear una categoría nueva
+</div>
+
+<div class="captura">
+    📸 CAPTURA 33: Cliente - Listar todos los productos
+</div>
+
+<div class="captura">
+    📸 CAPTURA 34: Cliente - Crear un producto nuevo
+</div>
+
+<div class="captura">
+    📸 CAPTURA 35: Cliente - Ver productos de una categoría
+</div>
+
+<h2>9.4. API y Swagger</h2>
+
+<div class="captura">
+    📸 CAPTURA 36: Swagger UI - Vista general de endpoints
+</div>
+
+<div class="captura">
+    📸 CAPTURA 37: Swagger - Probando GET /api/categorias
+</div>
+
+<div class="captura">
+    📸 CAPTURA 38: Swagger - Probando POST /api/productos
+</div>
+
+<h2>9.5. Pruebas</h2>
+
+<div class="captura">
+    📸 CAPTURA 39: Resultado de "mvn test" - Todas las pruebas pasando
+</div>
+
+<div class="captura">
+    📸 CAPTURA 40: VS Code mostrando las pruebas en verde
+</div>
+
+
+
+<h1 id="conclusion">10. CONCLUSIÓN</h1>
+
+<h2>10.1. ¿Qué he aprendido?</h2>
+
+<p>
+Con este proyecto he aprendido a:
+</p>
+
+<ul>
+    <li><strong>Crear una API REST</strong> con Spring Boot desde cero</li>
+    <li><strong>Conectar Java con MySQL</strong> usando JPA (sin escribir SQL a mano)</li>
+    <li><strong>Organizar el código en capas</strong> (Controller, Service, Repository)</li>
+    <li><strong>Comunicar dos programas</strong> mediante peticiones HTTP</li>
+    <li><strong>Escribir pruebas automáticas</strong> con JUnit 5</li>
+    <li><strong>Documentar una API</strong> con Swagger</li>
+    <li><strong>Usar Maven</strong> para gestionar dependencias y compilar</li>
+</ul>
+
+<h2>10.2. Dificultades encontradas</h2>
+
+<table>
+    <tr>
+        <th>Problema</th>
+        <th>Solución</th>
+    </tr>
+    <tr>
+        <td>Configurar la conexión a MySQL</td>
+        <td>Revisar application.properties y verificar que MySQL esté corriendo</td>
+    </tr>
+    <tr>
+        <td>Entender las anotaciones de Spring</td>
+        <td>Leer documentación y hacer pruebas paso a paso</td>
+    </tr>
+    <tr>
+        <td>Serializar/deserializar JSON</td>
+        <td>Usar GSON y definir bien las clases modelo</td>
+    </tr>
+    <tr>
+        <td>Las pruebas fallaban por datos residuales</td>
+        <td>Añadir @AfterEach para limpiar la base de datos</td>
+    </tr>
+</table>
+
+<h2>10.3. Posibles mejoras futuras</h2>
+
+<ul>
+    <li><strong>Interfaz gráfica:</strong> Cambiar la consola por una aplicación de escritorio (JavaFX) o web</li>
+    <li><strong>Autenticación:</strong> Añadir login de usuarios (Spring Security)</li>
+    <li><strong>Más entidades:</strong> Añadir clientes, pedidos, facturas...</li>
+    <li><strong>Validaciones:</strong> Más validaciones en el servidor (precio positivo, stock no negativo...)</li>
+    <li><strong>Despliegue en la nube:</strong> Subir el servidor a un servicio como Heroku o AWS</li>
+</ul>
+
+<h2>10.4. Valoración personal</h2>
+
+<div class="exito">
+<strong>El proyecto cumple con todos los requisitos:</strong>
+<ul>
+    <li>✅ Servidor Spring Boot en el puerto 12345</li>
+    <li>✅ Las tablas se crean automáticamente al arrancar</li>
+    <li>✅ 10 endpoints REST (superando el mínimo de 4)</li>
+    <li>✅ Los endpoints funcionan correctamente</li>
+    <li>✅ Cliente Java que consume la API</li>
+    <li>✅ Interfaz de consola con menús CRUD</li>
+    <li>✅ El cliente funciona correctamente</li>
+    <li>✅ 12 pruebas con JUnit 5</li>
+    <li>✅ Documentación HTML (Swagger + Javadoc)</li>
+    <li>✅ Archivos JAR ejecutables</li>
+    <li>✅ Código sencillo y comprensible</li>
+    <li>✅ Código bien estructurado en capas</li>
+    <li>✅ Código comentado</li>
+</ul>
+</div>
+
+<p>
+Ha sido un proyecto muy completo que me ha permitido ver cómo funciona una aplicación 
+cliente-servidor real. Aunque al principio Spring Boot parecía complicado, una vez entiendes 
+las anotaciones básicas todo se vuelve más fácil.
+</p>
+
+
