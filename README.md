@@ -1,6 +1,6 @@
-# 🛒 PROYECTO TIENDA - CLIENTE SERVIDOR
+# PROYECTO TIENDA - CLIENTE SERVIDOR
 
-> Sistema de gestión de tienda con arquitectura cliente-servidor. Servidor REST desarrollado en Spring Boot + Cliente Java de consola.
+Sistema de gestión de tienda con arquitectura cliente-servidor. Servidor REST desarrollado en Spring Boot y cliente Java de consola.
 
 **Versión:** 1.0.0  
 **Autor:** Luis  
@@ -8,22 +8,21 @@
 
 ---
 
-## 📋 Índice
+## Índice
 
-- [Descripción](#-descripción)
-- [Tecnologías](#-tecnologías)
-- [Estructura del Proyecto](#-estructura-del-proyecto)
-- [Requisitos Previos](#-requisitos-previos)
-- [Instalación y Configuración](#-instalación-y-configuración)
-- [Uso](#-uso)
-- [API REST](#-api-rest)
-- [Tests](#-tests)
-- [Documentación](#-documentación)
-- [Contribución](#-contribución)
+- [Descripción](#descripción)
+- [Tecnologías](#tecnologías)
+- [Estructura del Proyecto](#estructura-del-proyecto)
+- [Requisitos Previos](#requisitos-previos)
+- [Instalación y Configuración](#instalación-y-configuración)
+- [Uso](#uso)
+- [API REST](#api-rest)
+- [Tests](#tests)
+- [Documentación](#documentación)
 
 ---
 
-## 📖 Descripción
+## Descripción
 
 Sistema completo de gestión de tienda que implementa una arquitectura cliente-servidor:
 
@@ -33,111 +32,106 @@ Sistema completo de gestión de tienda que implementa una arquitectura cliente-s
 
 ### Características principales
 
-✅ CRUD completo de categorías y productos  
-✅ Documentación interactiva con Swagger/OpenAPI  
-✅ Tests unitarios e integración con JUnit 5  
-✅ Persistencia con JPA/Hibernate  
-✅ Pool de conexiones con HikariCP  
-✅ Documentación Javadoc generada  
-✅ Cliente HTTP nativo de Java (sin librerías externas)
+- CRUD completo de categorías y productos
+- Documentación interactiva con Swagger/OpenAPI
+- Tests unitarios e integración con JUnit 5
+- Persistencia con JPA/Hibernate
+- Pool de conexiones con HikariCP
+- Documentación Javadoc generada
+- Cliente HTTP nativo de Java
 
 ---
 
-## 🛠 Tecnologías
+## Tecnologías
 
 ### Servidor (Spring Boot)
-- **Spring Boot** 3.3.2 - Framework principal
-- **Spring Data JPA** - Persistencia de datos
-- **MySQL Connector** 8.0.33 - Driver JDBC
-- **Hibernate** 6.5.2 - ORM
-- **Swagger/OpenAPI** 2.6.0 - Documentación API
-- **JUnit 5** - Testing
-- **Maven** - Gestión de dependencias
+- Spring Boot 3.3.2
+- Spring Data JPA
+- MySQL Connector 8.0.33
+- Hibernate 6.5.2
+- Swagger/OpenAPI 2.6.0
+- JUnit 5
+- Maven
 
 ### Cliente (Java Console)
-- **Java SE** 17 - Plataforma
-- **Gson** 2.10.1 - Serialización JSON
-- **HttpURLConnection** - Cliente HTTP (nativo)
-- **Maven** - Gestión de dependencias
+- Java SE 17
+- Gson 2.10.1
+- HttpURLConnection (cliente HTTP nativo)
+- Maven
 
 ### Base de Datos
-- **MySQL** 8.0 - Sistema de gestión de base de datos
+- MySQL 8.0
 
 ---
 
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 Projecto_ClienteServidor/
 │
-├── servidor/                          # API REST Spring Boot
+├── servidor/
 │   ├── src/
 │   │   ├── main/
 │   │   │   ├── java/com/luistienda/
-│   │   │   │   ├── ServerApplication.java       # Clase principal
-│   │   │   │   ├── controller/                  # Controladores REST
+│   │   │   │   ├── ServerApplication.java
+│   │   │   │   ├── controller/
 │   │   │   │   │   ├── CategoriaController.java
 │   │   │   │   │   └── ProductoController.java
-│   │   │   │   ├── service/                     # Lógica de negocio
+│   │   │   │   ├── service/
 │   │   │   │   │   ├── CategoriaService.java
 │   │   │   │   │   └── ProductoService.java
-│   │   │   │   ├── repository/                  # Acceso a datos (JPA)
+│   │   │   │   ├── repository/
 │   │   │   │   │   ├── CategoriaRepository.java
 │   │   │   │   │   └── ProductoRepository.java
-│   │   │   │   └── model/                       # Entidades JPA
+│   │   │   │   └── model/
 │   │   │   │       ├── Categoria.java
 │   │   │   │       └── Producto.java
 │   │   │   └── resources/
-│   │   │       └── application.properties       # Configuración
-│   │   └── test/                                # Tests JUnit
-│   ├── pom.xml                                  # Dependencias Maven
-│   └── DESPLIEGUE.txt
+│   │   │       └── application.properties
+│   │   └── test/
+│   └── pom.xml
 │
-├── cliente/                           # Aplicación de consola
+├── cliente/
 │   ├── src/
 │   │   ├── main/
 │   │   │   └── java/com/luistienda/
-│   │   │       ├── ClienteApp.java              # Clase principal
+│   │   │       ├── ClienteApp.java
 │   │   │       ├── api/
-│   │   │       │   └── ApiClient.java           # Cliente HTTP
-│   │   │       └── model/                       # DTOs
+│   │   │       │   └── ApiClient.java
+│   │   │       └── model/
 │   │   │           ├── Categoria.java
 │   │   │           └── Producto.java
-│   │   └── test/                                # Tests JUnit
-│   ├── pom.xml
-│   └── DESPLIEGUE.txt
+│   │   └── test/
+│   └── pom.xml
 │
-├── MEMORIA_PROYECTO.html              # Documentación completa del proyecto
-├── README.md                          # Este archivo
-└── .gitignore                         # Archivos ignorados por Git
+├── README.md
+└── .gitignore
 ```
 
 ---
 
-## ⚙️ Requisitos Previos
+## Requisitos Previos
 
-Antes de comenzar, asegúrate de tener instalado:
-
-- **JDK 17** o superior ([descargar](https://adoptium.net/))
-- **MySQL 8.0** o superior ([descargar](https://dev.mysql.com/downloads/))
-- **Maven 3.6** o superior ([descargar](https://maven.apache.org/download.cgi))
-- **Git** para clonar el repositorio
+- JDK 17 o superior
+- MySQL 8.0 o superior
+- Maven 3.6 o superior
+- Git
 
 Verificar instalación:
 ```bash
-java -version    # Debe mostrar Java 17+
-mvn -version     # Debe mostrar Maven 3.6+
-mysql --version  # Debe mostrar MySQL 8.0+
+java -version
+mvn -version
+mysql --version
 ```
 
 ---
 
-## 🚀 Instalación y Configuración
+## Instalación y Configuración
 
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/TU_USUARIO/Projecto_ClienteServidor.git
+git clone https://github.com/Luiscerve/Projecto_ClienteServidor.git
 cd Projecto_ClienteServidor
 ```
 
@@ -160,19 +154,19 @@ Editar `servidor/src/main/resources/application.properties`:
 
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/tienda_db
-spring.datasource.username=TU_USUARIO
-spring.datasource.password=TU_CONTRASEÑA
+spring.datasource.username=root
+spring.datasource.password=tu_contraseña
 ```
 
 ### 4. Compilar el Proyecto
 
-**Servidor:**
+Servidor:
 ```bash
 cd servidor
 mvn clean package
 ```
 
-**Cliente:**
+Cliente:
 ```bash
 cd ../cliente
 mvn clean package
@@ -180,7 +174,7 @@ mvn clean package
 
 ---
 
-## ▶️ Uso
+## Uso
 
 ### Iniciar el Servidor
 
@@ -189,7 +183,7 @@ cd servidor
 java -jar target/servidor-tienda-1.0.0.jar
 ```
 
-El servidor iniciará en el puerto **12345**:
+El servidor iniciará en el puerto 12345:
 - API REST: http://localhost:12345/api
 - Swagger UI: http://localhost:12345/swagger-ui.html
 
@@ -202,20 +196,11 @@ cd cliente
 java -jar target/cliente-tienda-1.0.0.jar
 ```
 
-El cliente mostrará un menú interactivo:
-
-```
-MENÚ PRINCIPAL - TIENDA LUIS
-1. Gestionar Categorías
-2. Gestionar Productos
-0. Salir
-
-Elige opción:
-```
+El cliente mostrará un menú interactivo para gestionar categorías y productos.
 
 ### Datos de Ejemplo
 
-Para probar la aplicación, puedes insertar datos de ejemplo:
+Para probar la aplicación:
 
 ```sql
 USE tienda_db;
@@ -234,11 +219,11 @@ INSERT INTO productos (nombre, precio, stock, categoria_id) VALUES
 
 ---
 
-## 🌐 API REST
+## API REST
 
 ### Endpoints Disponibles
 
-#### Categorías
+**Categorías:**
 
 | Método | Endpoint | Descripción |
 |--------|----------|-------------|
@@ -248,7 +233,7 @@ INSERT INTO productos (nombre, precio, stock, categoria_id) VALUES
 | PUT | `/api/categorias/{id}` | Actualizar categoría |
 | DELETE | `/api/categorias/{id}` | Eliminar categoría |
 
-#### Productos
+**Productos:**
 
 | Método | Endpoint | Descripción |
 |--------|----------|-------------|
@@ -259,7 +244,7 @@ INSERT INTO productos (nombre, precio, stock, categoria_id) VALUES
 | PUT | `/api/productos/{id}` | Actualizar producto |
 | DELETE | `/api/productos/{id}` | Eliminar producto |
 
-### Ejemplo de Petición (POST)
+### Ejemplo de Petición
 
 ```bash
 curl -X POST http://localhost:12345/api/categorias \
@@ -269,12 +254,11 @@ curl -X POST http://localhost:12345/api/categorias \
 
 ### Documentación Interactiva
 
-Accede a Swagger UI para probar los endpoints interactivamente:
-👉 http://localhost:12345/swagger-ui.html
+Swagger UI: http://localhost:12345/swagger-ui.html
 
 ---
 
-## 🧪 Tests
+## Tests
 
 ### Ejecutar Tests del Servidor
 
@@ -284,11 +268,11 @@ mvn test
 ```
 
 Tests incluidos:
-- ✅ CRUD de categorías (crear, leer, actualizar, eliminar)
-- ✅ CRUD de productos
-- ✅ Filtrado de productos por categoría
-- ✅ Validaciones de datos
-- ✅ Manejo de errores
+- CRUD de categorías
+- CRUD de productos
+- Filtrado de productos por categoría
+- Validaciones de datos
+- Manejo de errores
 
 ### Ejecutar Tests del Cliente
 
@@ -297,62 +281,38 @@ cd cliente
 mvn test
 ```
 
-### Ver Resultados
-
-Los tests generan informes en:
-- `servidor/target/surefire-reports/`
-- `cliente/target/surefire-reports/`
+Los tests generan informes en los directorios `target/surefire-reports/`.
 
 ---
 
-## 📚 Documentación
+## Documentación
 
 ### Javadoc
 
-**Generar Javadoc del Servidor:**
+Generar Javadoc del Servidor:
 ```bash
 cd servidor
 mvn javadoc:javadoc
 ```
 Ver en: `servidor/target/site/apidocs/index.html`
 
-**Generar Javadoc del Cliente:**
+Generar Javadoc del Cliente:
 ```bash
 cd cliente
 mvn javadoc:javadoc
 ```
 Ver en: `cliente/target/javadoc/index.html`
 
-### Documentación Completa
+### Memoria del Proyecto
 
-Consulta `MEMORIA_PROYECTO.html` para documentación técnica detallada incluyendo:
+Consulta el archivo **MEMORIA_PROYECTO.pdf** para documentación técnica completa incluyendo:
 - Arquitectura del sistema
 - Diagramas de estructura
-- Explicación de cada componente
-- Guía de despliegue completa
+- Explicación detallada de componentes
+- Guía de despliegue
+- Capturas de pantalla del funcionamiento
 
 ---
-
-## 👤 Contribución
-
-Este es un proyecto académico de 2º DAM (Desarrollo de Aplicaciones Multiplataforma).
-
-Si deseas contribuir:
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/nueva-funcionalidad`)
-3. Commit tus cambios (`git commit -m 'Añade nueva funcionalidad'`)
-4. Push a la rama (`git push origin feature/nueva-funcionalidad`)
-5. Abre un Pull Request
-
----
-
-## 📄 Licencia
-
-Este proyecto es de uso educativo.
-
----
-
-## 📞 Contacto
 
 **Autor:** Luis  
 **Proyecto:** Sistema Cliente-Servidor de Gestión de Tienda  
